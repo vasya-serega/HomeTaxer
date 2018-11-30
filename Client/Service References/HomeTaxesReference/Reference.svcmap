@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6a0a9aca-90ff-430e-acbc-ba644a06c6e8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:64593/HomeTaxesService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="HomeTaxesService.wsdl" MetadataType="Wsdl" ID="090d40a6-a85b-40e2-bc5e-6a018b71d69f" SourceId="1" SourceUrl="http://localhost:64593/HomeTaxesService.svc?wsdl" />
+    <MetadataFile FileName="HomeTaxesService4.xsd" MetadataType="Schema" ID="73cae5a1-ca39-4a44-9730-e8dda1b7830a" SourceId="1" SourceUrl="http://localhost:64593/HomeTaxesService.svc?xsd=xsd4" />
+    <MetadataFile FileName="HomeTaxesService.disco" MetadataType="Disco" ID="36ce9b84-d209-4789-a183-cb54541e9a7b" SourceId="1" SourceUrl="http://localhost:64593/HomeTaxesService.svc?disco" />
+    <MetadataFile FileName="HomeTaxesService1.xsd" MetadataType="Schema" ID="2422ecf5-7b8b-4c69-a601-559d3c2c38e7" SourceId="1" SourceUrl="http://localhost:64593/HomeTaxesService.svc?xsd=xsd2" />
+    <MetadataFile FileName="HomeTaxesService.xsd" MetadataType="Schema" ID="94dc4aed-2f5b-478e-88d6-54bc923d2281" SourceId="1" SourceUrl="http://localhost:64593/HomeTaxesService.svc?xsd=xsd1" />
+    <MetadataFile FileName="HomeTaxesService2.xsd" MetadataType="Schema" ID="0480fea4-03d3-42db-8170-6612e70057cd" SourceId="1" SourceUrl="http://localhost:64593/HomeTaxesService.svc?xsd=xsd0" />
+    <MetadataFile FileName="HomeTaxesService5.xsd" MetadataType="Schema" ID="d677265f-8b74-4139-a3cb-11d44b52900a" SourceId="1" SourceUrl="http://localhost:64593/HomeTaxesService.svc?xsd=xsd5" />
+    <MetadataFile FileName="HomeTaxesService3.xsd" MetadataType="Schema" ID="76be7c34-29ed-4676-a160-2a570632d686" SourceId="1" SourceUrl="http://localhost:64593/HomeTaxesService.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

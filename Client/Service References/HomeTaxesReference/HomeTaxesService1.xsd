@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/HomeTaxer.Common.Schemas" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/HomeTaxer.Common.Schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:64593/HomeTaxesService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:64593/HomeTaxesService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/HomeTaxer.Common.Model" />
+  <xs:complexType name="DictOptions">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="AccountNames" nillable="true" type="q1:ArrayOfKeyValueOfintstring" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/HomeTaxer.Common.Model" minOccurs="0" name="Categories" nillable="true" type="q2:ArrayOfCategory" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Currencies" nillable="true" type="q3:ArrayOfKeyValueOfintstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DictOptions" nillable="true" type="tns:DictOptions" />
+  <xs:complexType name="ArrayOfOborot">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Oborot" nillable="true" type="tns:Oborot" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOborot" nillable="true" type="tns:ArrayOfOborot" />
+  <xs:complexType name="Oborot">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountNameId" type="xs:int" />
+      <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CategoryId" type="xs:int" />
+      <xs:element minOccurs="0" name="Count" type="xs:double" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CurrencyId" type="xs:int" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Note" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OborotId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SubCategory" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SubCategoryId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Summa" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Oborot" nillable="true" type="tns:Oborot" />
+</xs:schema>

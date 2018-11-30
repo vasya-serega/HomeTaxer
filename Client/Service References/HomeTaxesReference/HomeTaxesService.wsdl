@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="HomeTaxesService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:64593/HomeTaxesService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:64593/HomeTaxesService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:64593/HomeTaxesService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/HomeTaxer.Common.Schemas" />
+      <xsd:import schemaLocation="http://localhost:64593/HomeTaxesService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:64593/HomeTaxesService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/HomeTaxer.Common.Model" />
+      <xsd:import schemaLocation="http://localhost:64593/HomeTaxesService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/HomeTaxer.Common.Enums" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IHomeTaxesService_GetUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserId" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_GetUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_GetDictOptions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDictOptions" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_GetDictOptions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDictOptionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_GetOborots_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOborots" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_GetOborots_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOborotsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_GetAllOborots_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOborots" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_GetAllOborots_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOborotsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_InsertOborot_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertOborot" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_InsertOborot_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertOborotResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_UpdateOborot_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOborot" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_UpdateOborot_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOborotResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_DeleteOborot_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOborot" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_DeleteOborot_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOborotResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_InsertAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertAccount" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_InsertAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_UpdateAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAccount" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_UpdateAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_DeleteAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAccount" />
+  </wsdl:message>
+  <wsdl:message name="IHomeTaxesService_DeleteAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAccountResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IHomeTaxesService">
+    <wsdl:operation name="GetUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHomeTaxesService/GetUserId" message="tns:IHomeTaxesService_GetUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHomeTaxesService/GetUserIdResponse" message="tns:IHomeTaxesService_GetUserId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDictOptions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHomeTaxesService/GetDictOptions" message="tns:IHomeTaxesService_GetDictOptions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHomeTaxesService/GetDictOptionsResponse" message="tns:IHomeTaxesService_GetDictOptions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOborots">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHomeTaxesService/GetOborots" message="tns:IHomeTaxesService_GetOborots_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHomeTaxesService/GetOborotsResponse" message="tns:IHomeTaxesService_GetOborots_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOborots">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHomeTaxesService/GetAllOborots" message="tns:IHomeTaxesService_GetAllOborots_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHomeTaxesService/GetAllOborotsResponse" message="tns:IHomeTaxesService_GetAllOborots_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertOborot">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHomeTaxesService/InsertOborot" message="tns:IHomeTaxesService_InsertOborot_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHomeTaxesService/InsertOborotResponse" message="tns:IHomeTaxesService_InsertOborot_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOborot">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHomeTaxesService/UpdateOborot" message="tns:IHomeTaxesService_UpdateOborot_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHomeTaxesService/UpdateOborotResponse" message="tns:IHomeTaxesService_UpdateOborot_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOborot">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHomeTaxesService/DeleteOborot" message="tns:IHomeTaxesService_DeleteOborot_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHomeTaxesService/DeleteOborotResponse" message="tns:IHomeTaxesService_DeleteOborot_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHomeTaxesService/InsertAccount" message="tns:IHomeTaxesService_InsertAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHomeTaxesService/InsertAccountResponse" message="tns:IHomeTaxesService_InsertAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHomeTaxesService/UpdateAccount" message="tns:IHomeTaxesService_UpdateAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHomeTaxesService/UpdateAccountResponse" message="tns:IHomeTaxesService_UpdateAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHomeTaxesService/DeleteAccount" message="tns:IHomeTaxesService_DeleteAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHomeTaxesService/DeleteAccountResponse" message="tns:IHomeTaxesService_DeleteAccount_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IHomeTaxesService" type="tns:IHomeTaxesService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUserId">
+      <soap:operation soapAction="http://tempuri.org/IHomeTaxesService/GetUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDictOptions">
+      <soap:operation soapAction="http://tempuri.org/IHomeTaxesService/GetDictOptions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOborots">
+      <soap:operation soapAction="http://tempuri.org/IHomeTaxesService/GetOborots" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOborots">
+      <soap:operation soapAction="http://tempuri.org/IHomeTaxesService/GetAllOborots" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertOborot">
+      <soap:operation soapAction="http://tempuri.org/IHomeTaxesService/InsertOborot" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOborot">
+      <soap:operation soapAction="http://tempuri.org/IHomeTaxesService/UpdateOborot" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOborot">
+      <soap:operation soapAction="http://tempuri.org/IHomeTaxesService/DeleteOborot" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertAccount">
+      <soap:operation soapAction="http://tempuri.org/IHomeTaxesService/InsertAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccount">
+      <soap:operation soapAction="http://tempuri.org/IHomeTaxesService/UpdateAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAccount">
+      <soap:operation soapAction="http://tempuri.org/IHomeTaxesService/DeleteAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HomeTaxesService">
+    <wsdl:port name="BasicHttpBinding_IHomeTaxesService" binding="tns:BasicHttpBinding_IHomeTaxesService">
+      <soap:address location="http://localhost:64593/HomeTaxesService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
