@@ -192,7 +192,7 @@ namespace HomeTaxer.Client.Forms
 
         private void EditAccounts(object sender, EventArgs e)
         {
-            var accountEditForm = new AccountConfigForm(_service, _service.Accounts);
+            var accountEditForm = new AccountConfigForm(_service);
             accountEditForm.ShowDialog();
 
             if (accountEditForm.WasAccountsUpdated)
@@ -210,6 +210,12 @@ namespace HomeTaxer.Client.Forms
 
                 _isDictsLoading = false;
             }
+        }
+
+        private void EditCategories(object sender, EventArgs e)
+        {
+            var editForm = new CategoryConfigForm(_service);
+            editForm.ShowDialog();
         }
         #endregion Event Handlers
 

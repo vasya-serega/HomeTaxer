@@ -69,6 +69,12 @@
     <Compile Include="Forms\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CategoryConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CategoryConfigForm.Designer.cs">
+      <DependentUpon>CategoryConfigForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AccountConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +123,9 @@
     <Compile Include="Services\HtService.cs" />
     <EmbeddedResource Include="Forms\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CategoryConfigForm.resx">
+      <DependentUpon>CategoryConfigForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AccountConfigForm.resx">
       <DependentUpon>AccountConfigForm.cs</DependentUpon>
@@ -218,6 +227,8 @@
     <None Include="Icons\EditColor_16x16.png" />
     <Content Include="Icons\Add_16x16.png" />
     <None Include="Icons\Add_24x24.png" />
+    <None Include="Icons\Del_16x16.png" />
+    <None Include="Icons\Del_24x24.png" />
     <Content Include="Lib\CustomProgressBar.dll" />
     <None Include="Resources\EditColorIcon.ico" />
   </ItemGroup>

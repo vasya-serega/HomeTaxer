@@ -12,15 +12,13 @@ using HomeTaxer.Client.Services;
 
 namespace HomeTaxer.Client.Forms
 {
-    public partial class AccountConfigForm : Form
+    public partial class CategoryConfigForm : Form
     {
         private readonly HtService _service;
-        private readonly Dictionary<int, string> _accounts;
 
-        public AccountConfigForm(HtService service)
+        public CategoryConfigForm(HtService service)
         {
             _service = service;
-            _accounts = service.Accounts;
 
             InitializeComponent();
         }
@@ -66,12 +64,7 @@ namespace HomeTaxer.Client.Forms
 
         private void AccountConfigForm_Load(object sender, EventArgs e)
         {
-            foreach (var account in _accounts)
-            {
-                var accItem = new ListViewItem(account.Value);
-                accItem.SubItems.Add(account.Key.ToString());
-                accountListView.Items.Add(accItem);
-            }
+           
         }
 
         private void accountListView_SelectedIndexChanged(object sender, EventArgs e)

@@ -83,9 +83,29 @@ namespace HomeTaxer.Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap EditColor_16x16 {
+        internal static System.Drawing.Bitmap Del_16x16 {
             get {
-                object obj = ResourceManager.GetObject("EditColor_16x16", resourceCulture);
+                object obj = ResourceManager.GetObject("Del_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Del_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("Del_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Edit_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Edit_16x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

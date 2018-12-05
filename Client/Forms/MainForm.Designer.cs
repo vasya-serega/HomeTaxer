@@ -37,6 +37,7 @@
             this.optionsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.опціїToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountConfigMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.categoryConfigMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.довідкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.проПрограмуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainTabControl = new System.Windows.Forms.TabControl();
@@ -116,7 +117,8 @@
             // 
             this.optionsMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.опціїToolStripMenuItem,
-            this.accountConfigMenuItem});
+            this.accountConfigMenuItem,
+            this.categoryConfigMenuItem});
             this.optionsMenuItem.Name = "optionsMenuItem";
             this.optionsMenuItem.Size = new System.Drawing.Size(101, 20);
             this.optionsMenuItem.Text = "&Налаштування";
@@ -124,16 +126,23 @@
             // опціїToolStripMenuItem
             // 
             this.опціїToolStripMenuItem.Name = "опціїToolStripMenuItem";
-            this.опціїToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.опціїToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.опціїToolStripMenuItem.Text = "&Опції";
             this.опціїToolStripMenuItem.Click += new System.EventHandler(this.optionsMenuItem_Click);
             // 
             // accountConfigMenuItem
             // 
             this.accountConfigMenuItem.Name = "accountConfigMenuItem";
-            this.accountConfigMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.accountConfigMenuItem.Size = new System.Drawing.Size(194, 22);
             this.accountConfigMenuItem.Text = "&Рахунки";
             this.accountConfigMenuItem.Click += new System.EventHandler(this.EditAccounts);
+            // 
+            // categoryConfigMenuItem
+            // 
+            this.categoryConfigMenuItem.Name = "categoryConfigMenuItem";
+            this.categoryConfigMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.categoryConfigMenuItem.Text = "Категорії\\Підкатегорії";
+            this.categoryConfigMenuItem.Click += new System.EventHandler(this.EditCategories);
             // 
             // довідкаToolStripMenuItem
             // 
@@ -177,11 +186,13 @@
             // deleteBtn
             // 
             this.deleteBtn.Enabled = false;
+            this.deleteBtn.Image = global::HomeTaxer.Client.Properties.Resources.Del_24x24;
+            this.deleteBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.deleteBtn.Location = new System.Drawing.Point(491, 574);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(115, 32);
             this.deleteBtn.TabIndex = 3;
-            this.deleteBtn.Text = "Видалити";
+            this.deleteBtn.Text = "  Видалити";
             this.deleteBtn.UseVisualStyleBackColor = true;
             this.deleteBtn.EnabledChanged += new System.EventHandler(this.deleteBtn_EnabledChanged);
             this.deleteBtn.Click += new System.EventHandler(this.DeleteOborot);
@@ -189,7 +200,7 @@
             // editBtn
             // 
             this.editBtn.Enabled = false;
-            this.editBtn.Image = global::HomeTaxer.Client.Properties.Resources.EditColor_16x16;
+            this.editBtn.Image = global::HomeTaxer.Client.Properties.Resources.Edit_16x16;
             this.editBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.editBtn.Location = new System.Drawing.Point(276, 574);
             this.editBtn.Name = "editBtn";
@@ -419,6 +430,7 @@
         private System.Windows.Forms.Label accountLbl;
         private System.Windows.Forms.ToolStripMenuItem опціїToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem accountConfigMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem categoryConfigMenuItem;
     }
 }
 
