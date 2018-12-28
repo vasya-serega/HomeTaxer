@@ -132,7 +132,7 @@ namespace HomeTaxer.Client.Forms
 
         private void FillCategories()
         {
-            categoryComboBox.DataSource = new BindingSource(_service.Сategories, null);
+            categoryComboBox.DataSource = new BindingSource(_service.Categories, null);
             categoryComboBox.DisplayMember = "Name";
             categoryComboBox.ValueMember = "Id";
 
@@ -216,7 +216,7 @@ namespace HomeTaxer.Client.Forms
 
             dateTP.Value = UpdatedOborot.Date;
 
-            var selCategory = _service.Сategories.First(c => c.Id == UpdatedOborot.CategoryId);
+            var selCategory = _service.Categories.First(c => c.Id == UpdatedOborot.CategoryId);
             categoryComboBox.SelectedItem = selCategory;
 
             if (UpdatedOborot.SubCategoryId.HasValue)

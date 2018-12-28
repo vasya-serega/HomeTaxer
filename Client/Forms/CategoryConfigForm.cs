@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -9,174 +10,109 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using HomeTaxer.Client.Model;
 using HomeTaxer.Client.Services;
+using HomeTaxer.Common.Model;
+
+//using HomeTaxer.Common.Model;
+
+//using SubCategory = HomeTaxer.Common.Model.SubCategory;
 
 namespace HomeTaxer.Client.Forms
 {
     public partial class CategoryConfigForm : Form
     {
-        private readonly HtService _service;
+        //private readonly HtService _service;
+        private bool _isLoading;
+        private List<TempCategory> _tempCategories;
+        private readonly BindingSource _bs = new BindingSource();
 
         public CategoryConfigForm(HtService service)
         {
-            _service = service;
+            //_service = service;
+            _tempCategories = service.Categories.Select(c => new TempCategory(c)).ToList();
+            _bs.DataSource = _tempCategories.Where(t => !t.IsDeleted);
 
             InitializeComponent();
         }
 
-        public bool WasAccountsUpdated { get; private set; } = false;
-
-        private void AddAccount(object sender, EventArgs e)
+        private void CategoryConfigForm_Load(object sender, EventArgs e)
         {
-            var newLineBox = new LineEditBox("Створення нового рахунку");
-            if (newLineBox.ShowDialog() == DialogResult.OK)
-            {
-                InsertAccountToDbAsync(newLineBox.UpdatedText);
-            }
+            _isLoading = true;
+
+            categoriesLB.DataSource = _bs;
+            categoriesLB.DisplayMember = "Name";
+            categoriesLB.ValueMember = "Id";
+
+            _isLoading = false;
+            categoriesLB_SelectedIndexChanged(null, null);
         }
 
-        private void EditAccount(object sender, EventArgs e)
+        private void categoriesLB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selItem = accountListView.SelectedItems[0];
-            var accountId = Convert.ToInt32(selItem.SubItems[1].Text);
-
-            var newLineBox = new LineEditBox("Редагування існуючого рахунку", selItem.Text);
-            if (newLineBox.ShowDialog() == DialogResult.OK)
-            {
-                UpdateAccountInDbAsync(accountId, newLineBox.UpdatedText);
-            }
-        }
-
-        private void DeleteAccount(object sender, EventArgs e)
-        {
-            var selItem = accountListView.SelectedItems[0];
-            var accountId = Convert.ToInt32(selItem.SubItems[1].Text);
-
-            var confirmRes = MessageBox.Show($"Дійсно видалити рахунок '{selItem.Text}'? Рахунок буде видалиний лише при відсутності оборотів по ньому.", 
-                "Підтвердження дії", 
-                MessageBoxButtons.YesNo, 
-                MessageBoxIcon.Question);
-            if (confirmRes == DialogResult.Yes)
-            {
-                DeleteAccountInDbAsync(accountId);
-            }
-            
-        }
-
-        private void AccountConfigForm_Load(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void accountListView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var isEnabled = accountListView.SelectedItems.Count == 1;
-            SetEditDelEnabled(isEnabled);
-        }
-
-        private void SetEditDelEnabled(bool isEnabled)
-        {
-            editBtn.Enabled = isEnabled;
-            deleteBtn.Enabled = isEnabled;
-        }
-
-        private void SetEnableWhileAsync(bool isEnabled)
-        {
-            addBtn.Enabled = isEnabled;
-            SetEditDelEnabled(isEnabled);
-
-            infoLbl.Visible = !isEnabled;
-        }
-
-        private async void InsertAccountToDbAsync(string accountName)
-        {
-            SetEnableWhileAsync(false);
-
-            var result = await _service.InsertAccount(accountName);
-            if (result.IsSuccess)
-            {
-                AddInsertedAccount(result.InsertedId, accountName);
-            }
-            HandleErrorResult(result);
-            SetEnableWhileAsync(true);
-        }
-
-        private async void UpdateAccountInDbAsync(int accountId, string accountName)
-        {
-            SetEnableWhileAsync(false);
-
-            var result = await _service.UpdateAccount(accountId, accountName);
-            if (result.IsSuccess)
-            {
-                RefreshUpdatedAccount(accountId, accountName);
-            }
-
-            SetEnableWhileAsync(true);
-            HandleErrorResult(result);
-        }
-
-        private async void DeleteAccountInDbAsync(int accountId)
-        {
-            SetEnableWhileAsync(false);
-
-            var result = await _service.DeleteAccount(accountId);
-            if (result.IsSuccess)
-            {
-                RemoveDeletedAccount(accountId);
-            }
-
-            SetEnableWhileAsync(true);
-            HandleErrorResult(result);
-        }
-
-
-        private void AddInsertedAccount(int accountId, string accountName)
-        {
-            var newItem = new ListViewItem(accountName);
-            newItem.SubItems.Add(accountId.ToString());
-            accountListView.Items.Add(newItem);
-
-            _service.Accounts.Add(accountId, accountName);
-
-            WasAccountsUpdated = true;
-        }
-
-        private void RefreshUpdatedAccount(int accountId, string accountName)
-        {
-            var selItem = accountListView.SelectedItems[0];
-            selItem.Text = accountName;
-
-            _service.Accounts[accountId] = accountName;
-
-            WasAccountsUpdated = true;
-        }
-
-        private void RemoveDeletedAccount(int accountId)
-        {
-            var selItem = accountListView.SelectedItems[0];
-            accountListView.Items.Remove(selItem);
-
-            _service.Accounts.Remove(accountId);
-
-            WasAccountsUpdated = true;
-        }
-
-        private void HandleErrorResult(OperationResult result)
-        {
-            if (result.IsSuccess)
+            if (_isLoading)
             {
                 return;
             }
 
-            infoLbl.Text = result.Message;
-            infoLbl.Visible = true;
+            var isSelected = categoriesLB.SelectedIndex > -1;
+            editCategBtn.Enabled = isSelected;
+            deleteCategBtn.Enabled = isSelected;
 
-            var mes = $"{result.Exception.Message}";
-            errorProvider.SetError(infoLbl, mes);
+            var selCateg = (TempCategory)categoriesLB.SelectedItem;
+            var subCategories = selCateg.SubCategories.Select(d => new SubCategory(d.Key, d.Value)).ToList();
+
+            subCategoriesLB.DataSource = subCategories;
+            subCategoriesLB.DisplayMember = "Name";
+            subCategoriesLB.ValueMember = "Id";
         }
 
-        private void accountListView_Click(object sender, EventArgs e)
+        private void EditCategory(object sender, EventArgs e)
         {
+            var newLineBox = new LineEditBox("Редагування існуючої категорії", ((TempCategory)categoriesLB.SelectedItem).Name);
+            if (newLineBox.ShowDialog() == DialogResult.OK)
+            {
+                var updCategory = (TempCategory) categoriesLB.SelectedItem;
+                updCategory.Name = newLineBox.UpdatedText;
+                updCategory.IsModified = true;
 
+                _bs.ResetBindings(false);
+            }
+        }
+
+        private void AddCategory(object sender, EventArgs e)
+        {
+            var newLineBox = new LineEditBox("Створення нової категорії");
+            if (newLineBox.ShowDialog() == DialogResult.OK)
+            {
+                var id = GetNextNewIndex;
+                _tempCategories.Add(new TempCategory(id, newLineBox.UpdatedText));
+
+                _bs.ResetBindings(false);
+            }
+        }
+
+        private void DeleteCategory(object sender, EventArgs e)
+        {
+            var delCateg = (TempCategory) categoriesLB.SelectedItem;
+            var confirmText = $"Ви дійсно бажаєте видалити категорію '{delCateg.Name}' з усіма підкатегоріями?" +
+                              $"{Environment.NewLine}" +
+                "Увага: видалення відбудеться тільки при відсутності оборотів із даною категорією або її підкатегоріями";
+            var diagRes = MessageBox.Show(confirmText, "Підтвердження дії", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (diagRes == DialogResult.Yes)
+            {
+                delCateg.IsDeleted = true;
+
+                _bs.DataSource = _tempCategories.Where(t => !t.IsDeleted);
+                _bs.ResetBindings(false);
+            }
+        }
+
+        private int GetNextNewIndex
+        {
+            get
+            {
+                var min = _tempCategories.Select(t => t.Id).Min();
+                return min < 0 ? min - 1 : -1;
+            }
         }
     }
 }

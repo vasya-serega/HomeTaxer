@@ -4,6 +4,9 @@ using System.ServiceModel.Syndication;
 using System.Threading.Tasks;
 using HomeTaxer.Client.HomeTaxesReference;
 using HomeTaxer.Client.Model;
+//using HomeTaxer.Common.Enums;
+//using HomeTaxer.Common.Model;
+//using HomeTaxer.Common.Schemas;
 
 namespace HomeTaxer.Client.Services
 {
@@ -23,7 +26,7 @@ namespace HomeTaxer.Client.Services
 
         public int AccountNameId { get; set; }
 
-        public List<Category> Сategories => _dictOptions.Categories;
+        public List<Category> Categories => _dictOptions.Categories;
 
         public Dictionary<int, string> Currencies => _dictOptions.Currencies;
 

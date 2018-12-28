@@ -38,6 +38,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\CustomProgressBar.dll</HintPath>
     </Reference>
+    <Reference Include="HomeTaxer.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
       <Private>True</Private>
@@ -111,6 +112,7 @@
     <Compile Include="Forms\OptionsForm.Designer.cs">
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\TempCategory.cs" />
     <Compile Include="Model\InsertOperationResult.cs" />
     <Compile Include="Model\OperationResult.cs" />
     <Compile Include="Program.cs" />
@@ -158,6 +160,10 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Connector.Interfaces.DictOptions.datasource" />
     <None Include="Properties\DataSources\Connector.Interfaces.Oborot.datasource" />
+    <None Include="Properties\DataSources\HomeTaxer.Common.Schemas.DictOptions.datasource" />
+    <None Include="Properties\DataSources\HomeTaxer.Common.Schemas.DictOptions1.datasource" />
+    <None Include="Properties\DataSources\HomeTaxer.Common.Schemas.Oborot.datasource" />
+    <None Include="Properties\DataSources\HomeTaxer.Common.Schemas.Oborot1.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -218,6 +224,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{101CA3A5-81FC-4AE9-8899-FA92928A58E4}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Connector\Connector.csproj">
       <Project>{C67F14AD-6078-451D-AEA5-E05D76529689}</Project>
       <Name>Connector</Name>

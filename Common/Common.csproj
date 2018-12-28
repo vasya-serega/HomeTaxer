@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Enums\OborotDirection.cs" />
     <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\SubCategory.cs" />
     <Compile Include="Schemas\DictOptions.cs" />
     <Compile Include="Schemas\Oborot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

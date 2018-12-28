@@ -29,93 +29,67 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.editBtn = new System.Windows.Forms.Button();
-            this.addBtn = new System.Windows.Forms.Button();
-            this.deleteBtn = new System.Windows.Forms.Button();
-            this.accountListView = new System.Windows.Forms.ListView();
-            this.AccountName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.editCategBtn = new System.Windows.Forms.Button();
+            this.addCategBtn = new System.Windows.Forms.Button();
+            this.deleteCategBtn = new System.Windows.Forms.Button();
             this.infoLbl = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.subCategoriesLB = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.categoriesLB = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.saveBtn = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // editBtn
+            // editCategBtn
             // 
-            this.editBtn.Enabled = false;
-            this.editBtn.Image = global::HomeTaxer.Client.Properties.Resources.Edit_16x16;
-            this.editBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.editBtn.Location = new System.Drawing.Point(282, 87);
-            this.editBtn.Name = "editBtn";
-            this.editBtn.Size = new System.Drawing.Size(115, 30);
-            this.editBtn.TabIndex = 2;
-            this.editBtn.Text = "Редагувати";
-            this.editBtn.UseVisualStyleBackColor = true;
-            this.editBtn.Click += new System.EventHandler(this.EditAccount);
+            this.editCategBtn.Enabled = false;
+            this.editCategBtn.Image = global::HomeTaxer.Client.Properties.Resources.Edit_16x16;
+            this.editCategBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.editCategBtn.Location = new System.Drawing.Point(282, 87);
+            this.editCategBtn.Name = "editCategBtn";
+            this.editCategBtn.Size = new System.Drawing.Size(115, 30);
+            this.editCategBtn.TabIndex = 2;
+            this.editCategBtn.Text = "Редагувати";
+            this.editCategBtn.UseVisualStyleBackColor = true;
+            this.editCategBtn.Click += new System.EventHandler(this.EditCategory);
             // 
-            // addBtn
+            // addCategBtn
             // 
-            this.addBtn.Image = global::HomeTaxer.Client.Properties.Resources.Add_16x16;
-            this.addBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.addBtn.Location = new System.Drawing.Point(282, 40);
-            this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(115, 30);
-            this.addBtn.TabIndex = 4;
-            this.addBtn.Text = "Додати";
-            this.addBtn.UseVisualStyleBackColor = true;
-            this.addBtn.Click += new System.EventHandler(this.AddAccount);
+            this.addCategBtn.Image = global::HomeTaxer.Client.Properties.Resources.Add_16x16;
+            this.addCategBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.addCategBtn.Location = new System.Drawing.Point(282, 40);
+            this.addCategBtn.Name = "addCategBtn";
+            this.addCategBtn.Size = new System.Drawing.Size(115, 30);
+            this.addCategBtn.TabIndex = 4;
+            this.addCategBtn.Text = "Додати";
+            this.addCategBtn.UseVisualStyleBackColor = true;
+            this.addCategBtn.Click += new System.EventHandler(this.AddCategory);
             // 
-            // deleteBtn
+            // deleteCategBtn
             // 
-            this.deleteBtn.Enabled = false;
-            this.deleteBtn.Image = global::HomeTaxer.Client.Properties.Resources.Del_16x16;
-            this.deleteBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.deleteBtn.Location = new System.Drawing.Point(282, 135);
-            this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Size = new System.Drawing.Size(115, 30);
-            this.deleteBtn.TabIndex = 5;
-            this.deleteBtn.Text = " Видалити";
-            this.deleteBtn.UseVisualStyleBackColor = true;
-            this.deleteBtn.Click += new System.EventHandler(this.DeleteAccount);
-            // 
-            // accountListView
-            // 
-            this.accountListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.AccountName,
-            this.Id});
-            this.accountListView.GridLines = true;
-            this.accountListView.HideSelection = false;
-            this.accountListView.Location = new System.Drawing.Point(6, 30);
-            this.accountListView.MultiSelect = false;
-            this.accountListView.Name = "accountListView";
-            this.accountListView.Size = new System.Drawing.Size(230, 269);
-            this.accountListView.TabIndex = 6;
-            this.accountListView.UseCompatibleStateImageBehavior = false;
-            this.accountListView.View = System.Windows.Forms.View.Details;
-            this.accountListView.SelectedIndexChanged += new System.EventHandler(this.accountListView_SelectedIndexChanged);
-            this.accountListView.Click += new System.EventHandler(this.accountListView_Click);
-            // 
-            // AccountName
-            // 
-            this.AccountName.Text = "Назва рахунку";
-            this.AccountName.Width = 226;
-            // 
-            // Id
-            // 
-            this.Id.Width = 0;
+            this.deleteCategBtn.Enabled = false;
+            this.deleteCategBtn.Image = global::HomeTaxer.Client.Properties.Resources.Del_16x16;
+            this.deleteCategBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.deleteCategBtn.Location = new System.Drawing.Point(282, 135);
+            this.deleteCategBtn.Name = "deleteCategBtn";
+            this.deleteCategBtn.Size = new System.Drawing.Size(115, 30);
+            this.deleteCategBtn.TabIndex = 5;
+            this.deleteCategBtn.Text = " Видалити";
+            this.deleteCategBtn.UseVisualStyleBackColor = true;
+            this.deleteCategBtn.Click += new System.EventHandler(this.DeleteCategory);
             // 
             // infoLbl
             // 
             this.infoLbl.AutoSize = true;
-            this.infoLbl.Location = new System.Drawing.Point(418, 20);
+            this.infoLbl.Location = new System.Drawing.Point(741, 35);
             this.infoLbl.Name = "infoLbl";
             this.infoLbl.Size = new System.Drawing.Size(141, 15);
             this.infoLbl.TabIndex = 7;
@@ -126,41 +100,51 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // listBox1
+            // subCategoriesLB
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Items.AddRange(new object[] {
+            this.subCategoriesLB.FormattingEnabled = true;
+            this.subCategoriesLB.ItemHeight = 15;
+            this.subCategoriesLB.Items.AddRange(new object[] {
             "123",
             "156",
             "157"});
-            this.listBox1.Location = new System.Drawing.Point(19, 30);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(271, 94);
-            this.listBox1.TabIndex = 8;
+            this.subCategoriesLB.Location = new System.Drawing.Point(19, 30);
+            this.subCategoriesLB.Name = "subCategoriesLB";
+            this.subCategoriesLB.Size = new System.Drawing.Size(271, 334);
+            this.subCategoriesLB.TabIndex = 8;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.accountListView);
-            this.groupBox1.Controls.Add(this.addBtn);
-            this.groupBox1.Controls.Add(this.editBtn);
-            this.groupBox1.Controls.Add(this.deleteBtn);
-            this.groupBox1.Location = new System.Drawing.Point(25, 51);
+            this.groupBox1.Controls.Add(this.categoriesLB);
+            this.groupBox1.Controls.Add(this.addCategBtn);
+            this.groupBox1.Controls.Add(this.editCategBtn);
+            this.groupBox1.Controls.Add(this.deleteCategBtn);
+            this.groupBox1.Location = new System.Drawing.Point(25, 80);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(449, 316);
+            this.groupBox1.Size = new System.Drawing.Size(449, 372);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Категорії";
             // 
+            // categoriesLB
+            // 
+            this.categoriesLB.FormattingEnabled = true;
+            this.categoriesLB.ItemHeight = 15;
+            this.categoriesLB.Location = new System.Drawing.Point(6, 30);
+            this.categoriesLB.Name = "categoriesLB";
+            this.categoriesLB.Size = new System.Drawing.Size(260, 334);
+            this.categoriesLB.TabIndex = 6;
+            this.categoriesLB.SelectedIndexChanged += new System.EventHandler(this.categoriesLB_SelectedIndexChanged);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.listBox1);
+            this.groupBox2.Controls.Add(this.subCategoriesLB);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Location = new System.Drawing.Point(537, 51);
+            this.groupBox2.Location = new System.Drawing.Point(537, 80);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(516, 316);
+            this.groupBox2.Size = new System.Drawing.Size(516, 372);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Підкатегорії";
@@ -200,11 +184,31 @@
             this.button3.Text = " Видалити";
             this.button3.UseVisualStyleBackColor = true;
             // 
+            // saveBtn
+            // 
+            this.saveBtn.Location = new System.Drawing.Point(312, 27);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(120, 30);
+            this.saveBtn.TabIndex = 11;
+            this.saveBtn.Text = "Зберегти зміни";
+            this.saveBtn.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(583, 27);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(120, 30);
+            this.button4.TabIndex = 12;
+            this.button4.Text = "Відхилити зміни";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
             // CategoryConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1121, 447);
+            this.ClientSize = new System.Drawing.Size(1079, 474);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.infoLbl);
@@ -213,7 +217,7 @@
             this.MinimizeBox = false;
             this.Name = "CategoryConfigForm";
             this.Text = "Редагування категорій";
-            this.Load += new System.EventHandler(this.AccountConfigForm_Load);
+            this.Load += new System.EventHandler(this.CategoryConfigForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -223,19 +227,19 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button editBtn;
-        private System.Windows.Forms.Button addBtn;
-        private System.Windows.Forms.Button deleteBtn;
-        private System.Windows.Forms.ListView accountListView;
-        private System.Windows.Forms.ColumnHeader AccountName;
-        private System.Windows.Forms.ColumnHeader Id;
+        private System.Windows.Forms.Button editCategBtn;
+        private System.Windows.Forms.Button addCategBtn;
+        private System.Windows.Forms.Button deleteCategBtn;
         private System.Windows.Forms.Label infoLbl;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox subCategoriesLB;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ListBox categoriesLB;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button saveBtn;
     }
 }
