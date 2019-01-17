@@ -5,10 +5,12 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HomeTaxer.Client.Model;
+using HomeTaxer.Client.Model.Enums;
 using HomeTaxer.Client.Services;
 using HomeTaxer.Common.Model;
 
@@ -21,24 +23,75 @@ namespace HomeTaxer.Client.Forms
     public partial class CategoryConfigForm : Form
     {
         //private readonly HtService _service;
-        private bool _isLoading;
+        private bool _isLoading, _isRefreshing;
         private List<TempCategory> _tempCategories;
-        private readonly BindingSource _bs = new BindingSource();
+        private readonly BindingSource _categoryBs = new BindingSource();
+        private readonly BindingSource _subCategoryBs = new BindingSource();
 
         public CategoryConfigForm(HtService service)
         {
             //_service = service;
             _tempCategories = service.Categories.Select(c => new TempCategory(c)).ToList();
-            _bs.DataSource = _tempCategories.Where(t => !t.IsDeleted);
+            _categoryBs.DataSource = _tempCategories.Where(t => !t.IsDeleted).ToList();
+            _categoryBs.ListChanged += CategoryBsOnListChanged;
 
             InitializeComponent();
+        }
+
+        private void CategoryBsOnListChanged(object sender, ListChangedEventArgs e)
+        {
+            if (e.ListChangedType == ListChangedType.ItemAdded)
+            {
+                _tempCategories.Add((TempCategory) categoriesLB.Items[e.NewIndex]);
+                _categoryBs.ResetBindings(false);
+            }
+
+            if (e.ListChangedType == ListChangedType.ItemChanged)
+            {
+                var srcItem = ((List<TempCategory>)_categoryBs.DataSource).ElementAt(e.NewIndex);
+                _tempCategories.ElementAt(e.NewIndex).IsModified = true;
+                _tempCategories.ElementAt(e.NewIndex).Name = srcItem.Name;
+
+                _isRefreshing = false;
+                categoriesLB.SelectedIndex = e.NewIndex;
+                _categoryBs.ResetBindings(false);
+            }
+            if (e.ListChangedType == ListChangedType.ItemDeleted)
+            {
+                _tempCategories.ElementAt(e.NewIndex).IsDeleted = true;
+                if (categoriesLB.Items.Count > e.NewIndex)
+                {
+                    categoriesLB_SelectedIndexChanged(null, null);
+                }
+                _categoryBs.ResetBindings(false);
+            }
+        }
+
+        private void SubCategoryBsOnListChanged(object sender, ListChangedEventArgs e)
+        {
+            var categoryId = ((TempCategory)categoriesLB.SelectedItem).Id;
+            var subCategories = _tempCategories.First(c => c.Id == categoryId).SubCategories;
+
+            if (e.ListChangedType == ListChangedType.ItemAdded)
+            {
+                //subCategories.Add((TempSubCategory)subCategoriesLB.Items[e.NewIndex]);
+                _subCategoryBs.ResetBindings(false);
+            }
+            if (e.ListChangedType == ListChangedType.ItemChanged)
+            {
+                throw new NotImplementedException();
+            }
+            if (e.ListChangedType == ListChangedType.ItemDeleted)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         private void CategoryConfigForm_Load(object sender, EventArgs e)
         {
             _isLoading = true;
 
-            categoriesLB.DataSource = _bs;
+            categoriesLB.DataSource = _categoryBs;
             categoriesLB.DisplayMember = "Name";
             categoriesLB.ValueMember = "Id";
 
@@ -48,45 +101,59 @@ namespace HomeTaxer.Client.Forms
 
         private void categoriesLB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_isLoading)
+            if (_isLoading || _isRefreshing)
             {
                 return;
             }
 
             var isSelected = categoriesLB.SelectedIndex > -1;
             editCategBtn.Enabled = isSelected;
-            deleteCategBtn.Enabled = isSelected;
+            deleteCategBtn.Enabled = isSelected && categoriesLB.Items.Count > 1;
 
-            var selCateg = (TempCategory)categoriesLB.SelectedItem;
-            var subCategories = selCateg.SubCategories.Select(d => new SubCategory(d.Key, d.Value)).ToList();
+            if (!isSelected)
+            {
+                MessageBox.Show("Category is not selected", "Crippled development", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
 
-            subCategoriesLB.DataSource = subCategories;
+            var categoryId = ((TempCategory)categoriesLB.SelectedItem).Id;
+            var subCategories = _tempCategories.First(c => c.Id == categoryId).SubCategories;
+            _subCategoryBs.DataSource = subCategories;
+            _subCategoryBs.ListChanged += SubCategoryBsOnListChanged;
+
+            subCategoriesLB.DataSource = _subCategoryBs;
             subCategoriesLB.DisplayMember = "Name";
             subCategoriesLB.ValueMember = "Id";
         }
 
-        private void EditCategory(object sender, EventArgs e)
+        private void subCategoriesLB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var newLineBox = new LineEditBox("Редагування існуючої категорії", ((TempCategory)categoriesLB.SelectedItem).Name);
-            if (newLineBox.ShowDialog() == DialogResult.OK)
-            {
-                var updCategory = (TempCategory) categoriesLB.SelectedItem;
-                updCategory.Name = newLineBox.UpdatedText;
-                updCategory.IsModified = true;
 
-                _bs.ResetBindings(false);
-            }
         }
 
         private void AddCategory(object sender, EventArgs e)
         {
-            var newLineBox = new LineEditBox("Створення нової категорії");
+            var newLineBox = new LineEditBox("Створення нової категорії", LineEditBoxEntity.Category);
             if (newLineBox.ShowDialog() == DialogResult.OK)
             {
                 var id = GetNextNewIndex;
-                _tempCategories.Add(new TempCategory(id, newLineBox.UpdatedText));
+                _categoryBs.Add(new TempCategory(id, newLineBox.UpdatedText));
+            }
+        }
 
-                _bs.ResetBindings(false);
+        private void EditCategory(object sender, EventArgs e)
+        {
+            var newLineBox = new LineEditBox("Редагування існуючої категорії", 
+                LineEditBoxEntity.Category, ((TempCategory)categoriesLB.SelectedItem).Name);
+            if (newLineBox.ShowDialog() == DialogResult.OK)
+            {
+                var updCategory = (TempCategory)categoriesLB.SelectedItem;
+                var srcItem = ((List<TempCategory>) _categoryBs.DataSource).First(c => c.Id == updCategory.Id);
+                srcItem.Name = newLineBox.UpdatedText;
+
+                _isRefreshing = true;
+                _categoryBs.ResetCurrentItem();
             }
         }
 
@@ -99,10 +166,18 @@ namespace HomeTaxer.Client.Forms
             var diagRes = MessageBox.Show(confirmText, "Підтвердження дії", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (diagRes == DialogResult.Yes)
             {
-                delCateg.IsDeleted = true;
+                _categoryBs.RemoveCurrent();
+            }
+        }
 
-                _bs.DataSource = _tempCategories.Where(t => !t.IsDeleted);
-                _bs.ResetBindings(false);
+        private void AddSubCategory(object sender, EventArgs e)
+        {
+            var newLineBox = new LineEditBox("Створення нової підкатегорії", LineEditBoxEntity.SubCategory);
+            if (newLineBox.ShowDialog() == DialogResult.OK)
+            {
+                var categoryId = ((TempCategory)categoriesLB.SelectedItem).Id;
+                var id = GetNextNewSubCategoryIndex(categoryId);
+                _subCategoryBs.Add(new TempSubCategory(id, newLineBox.UpdatedText));
             }
         }
 
@@ -113,6 +188,13 @@ namespace HomeTaxer.Client.Forms
                 var min = _tempCategories.Select(t => t.Id).Min();
                 return min < 0 ? min - 1 : -1;
             }
+        }
+
+        private int GetNextNewSubCategoryIndex(int categoryId)
+        {
+            var subCategories = _tempCategories.First(t => t.Id == categoryId).SubCategories;
+            var min = subCategories.Count > 0 ? subCategories.Min(sc => sc.Id) : -1;
+            return min < 0 ? min - 1 : -1;
         }
     }
 }

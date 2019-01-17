@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HomeTaxer.Client.Model;
+using HomeTaxer.Client.Model.Enums;
 using HomeTaxer.Client.Services;
 
 namespace HomeTaxer.Client.Forms
@@ -29,7 +30,7 @@ namespace HomeTaxer.Client.Forms
 
         private void AddAccount(object sender, EventArgs e)
         {
-            var newLineBox = new LineEditBox("Створення нового рахунку");
+            var newLineBox = new LineEditBox("Створення нового рахунку", LineEditBoxEntity.Account);
             if (newLineBox.ShowDialog() == DialogResult.OK)
             {
                 InsertAccountToDbAsync(newLineBox.UpdatedText);
@@ -41,7 +42,7 @@ namespace HomeTaxer.Client.Forms
             var selItem = accountListView.SelectedItems[0];
             var accountId = Convert.ToInt32(selItem.SubItems[1].Text);
 
-            var newLineBox = new LineEditBox("Редагування існуючого рахунку", selItem.Text);
+            var newLineBox = new LineEditBox("Редагування існуючого рахунку", LineEditBoxEntity.Account, selItem.Text);
             if (newLineBox.ShowDialog() == DialogResult.OK)
             {
                 UpdateAccountInDbAsync(accountId, newLineBox.UpdatedText);

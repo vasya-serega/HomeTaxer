@@ -104,14 +104,11 @@
             // 
             this.subCategoriesLB.FormattingEnabled = true;
             this.subCategoriesLB.ItemHeight = 15;
-            this.subCategoriesLB.Items.AddRange(new object[] {
-            "123",
-            "156",
-            "157"});
             this.subCategoriesLB.Location = new System.Drawing.Point(19, 30);
             this.subCategoriesLB.Name = "subCategoriesLB";
             this.subCategoriesLB.Size = new System.Drawing.Size(271, 334);
             this.subCategoriesLB.TabIndex = 8;
+            this.subCategoriesLB.SelectedIndexChanged += new System.EventHandler(this.subCategoriesLB_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -159,6 +156,7 @@
             this.button1.TabIndex = 8;
             this.button1.Text = "Додати";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.AddSubCategory);
             // 
             // button2
             // 

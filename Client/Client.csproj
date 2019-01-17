@@ -112,6 +112,8 @@
     <Compile Include="Forms\OptionsForm.Designer.cs">
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Enums\LineEditBoxEntity.cs" />
+    <Compile Include="Model\TempSubCategory.cs" />
     <Compile Include="Model\TempCategory.cs" />
     <Compile Include="Model\InsertOperationResult.cs" />
     <Compile Include="Model\OperationResult.cs" />

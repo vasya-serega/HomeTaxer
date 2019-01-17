@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using HomeTaxer.Client.HomeTaxesReference;
 
 namespace HomeTaxer.Client.Model
 {
-    [DataContract]
-    public class TempCategory : Category
+    public class TempCategory
     {
+        private readonly List<TempSubCategory> _subCategories = new List<TempSubCategory>();
+
         public TempCategory(Category category)
         {
             Id = category.Id;
             Name = category.Name;
-            SubCategories = new Dictionary<int, string>(category.SubCategories);
+            _subCategories.AddRange(category.SubCategories.Select(sc => new TempSubCategory(sc)));
         }
 
         public TempCategory(int id, string name)
@@ -25,14 +27,16 @@ namespace HomeTaxer.Client.Model
             Id = id;
             Name = name;
             IsModified = true;
-            SubCategories = new Dictionary<int, string>();
         }
 
-        //public string EditableName { get; set; }
-        public new string Name { get; set; }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
 
         public bool IsModified { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public List<TempSubCategory> SubCategories => _subCategories;
     }
 }

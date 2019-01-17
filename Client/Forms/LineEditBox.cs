@@ -1,12 +1,16 @@
 ﻿using System.Windows.Forms;
+using HomeTaxer.Client.Model.Enums;
 
 namespace HomeTaxer.Client.Forms
 {
     public partial class LineEditBox : Form
     {
-        public LineEditBox(string title, string existingValue = null)
+        private LineEditBoxEntity _entityType;
+
+        public LineEditBox(string title, LineEditBoxEntity entityType, string existingValue = null)
         {
             InitializeComponent();
+            _entityType = entityType;
             Text = title;
             textBox.Text = existingValue;
         }
@@ -23,7 +27,7 @@ namespace HomeTaxer.Client.Forms
 
         private void okBtn_Click(object sender, System.EventArgs e)
         {
-            var confirmRes = MessageBox.Show($"Зберегти зміни? Им'я рахунку '{UpdatedText}'",
+            var confirmRes = MessageBox.Show($"Зберегти зміни? Им'я {_entityType.GetName()} '{UpdatedText}'",
                 "Підтвердження операції.",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
