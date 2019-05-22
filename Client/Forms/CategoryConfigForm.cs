@@ -79,11 +79,23 @@ namespace HomeTaxer.Client.Forms
             }
             if (e.ListChangedType == ListChangedType.ItemChanged)
             {
-                throw new NotImplementedException();
+                var srcItem = subCategories.ElementAt(e.NewIndex);
+                srcItem.IsModified = true;
+
+                _isRefreshing = false;
+                subCategoriesLB.SelectedIndex = e.NewIndex;
+                _subCategoryBs.ResetBindings(false);
             }
             if (e.ListChangedType == ListChangedType.ItemDeleted)
             {
-                throw new NotImplementedException();
+                var srcItem = subCategories.ElementAt(e.NewIndex);
+                srcItem.IsDeleted = true;
+
+                if (subCategoriesLB.Items.Count > e.NewIndex)
+                {
+                    subCategoriesLB_SelectedIndexChanged(null, null);
+                }
+                _subCategoryBs.ResetBindings(false);
             }
         }
 
@@ -119,7 +131,7 @@ namespace HomeTaxer.Client.Forms
 
             var categoryId = ((TempCategory)categoriesLB.SelectedItem).Id;
             var subCategories = _tempCategories.First(c => c.Id == categoryId).SubCategories;
-            _subCategoryBs.DataSource = subCategories;
+            _subCategoryBs.DataSource = subCategories.Where(s => !s.IsDeleted);
             _subCategoryBs.ListChanged += SubCategoryBsOnListChanged;
 
             subCategoriesLB.DataSource = _subCategoryBs;
@@ -129,7 +141,14 @@ namespace HomeTaxer.Client.Forms
 
         private void subCategoriesLB_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_isLoading || _isRefreshing)
+            {
+                return;
+            }
 
+            var isSelected = subCategoriesLB.SelectedIndex > -1;
+            editSubCategBtn.Enabled = isSelected;
+            delSubCategBtn.Enabled = isSelected && subCategoriesLB.Items.Count > 1;
         }
 
         private void AddCategory(object sender, EventArgs e)
@@ -181,6 +200,35 @@ namespace HomeTaxer.Client.Forms
             }
         }
 
+        private void EditSubCategory(object sender, EventArgs e)
+        {
+            var newLineBox = new LineEditBox("Редагування існуючої підкатегорії",
+                LineEditBoxEntity.SubCategory, ((TempSubCategory)subCategoriesLB.SelectedItem).Name);
+            if (newLineBox.ShowDialog() == DialogResult.OK)
+            {
+                var subCategory = (TempSubCategory)subCategoriesLB.SelectedItem;
+                var srcItem = ((List<TempSubCategory>)_subCategoryBs.DataSource).First(c => c.Id == subCategory.Id);
+                srcItem.Name = newLineBox.UpdatedText;
+
+                _isRefreshing = true;
+                _subCategoryBs.ResetCurrentItem();
+            }
+        }
+
+        private void DelSubCategory(object sender, EventArgs e)
+        {
+            var delSubCateg = (TempSubCategory)subCategoriesLB.SelectedItem;
+            var confirmText = $"Ви дійсно бажаєте видалити підкатегорію '{delSubCateg.Name}' з усіма підкатегоріями?" +
+                              $"{Environment.NewLine}" +
+                              "Увага: видалення відбудеться тільки при відсутності оборотів із даною підкатегорією";
+            var diagRes = MessageBox.Show(confirmText, "Підтвердження дії", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (diagRes == DialogResult.Yes)
+            {
+                //_subCategoryBs.RemoveCurrent();
+                // incorrect!!!
+            }
+        }
+
         private int GetNextNewIndex
         {
             get
@@ -189,6 +237,8 @@ namespace HomeTaxer.Client.Forms
                 return min < 0 ? min - 1 : -1;
             }
         }
+
+        
 
         private int GetNextNewSubCategoryIndex(int categoryId)
         {

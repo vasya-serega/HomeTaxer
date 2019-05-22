@@ -237,10 +237,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Icons\EditColor_16x16.png" />
+    <Content Include="Icons\AddRow.png" />
     <Content Include="Icons\Add_16x16.png" />
     <None Include="Icons\Add_24x24.png" />
     <None Include="Icons\Del_16x16.png" />
     <None Include="Icons\Del_24x24.png" />
+    <Content Include="Icons\DelRow.png" />
+    <None Include="Icons\EditRow.png" />
     <Content Include="Lib\CustomProgressBar.dll" />
     <None Include="Resources\EditColorIcon.ico" />
   </ItemGroup>

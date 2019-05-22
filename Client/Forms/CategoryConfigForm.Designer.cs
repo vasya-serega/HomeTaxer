@@ -39,8 +39,8 @@
             this.categoriesLB = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.editSubCategBtn = new System.Windows.Forms.Button();
+            this.delSubCategBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -137,8 +137,8 @@
             // 
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.subCategoriesLB);
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.editSubCategBtn);
+            this.groupBox2.Controls.Add(this.delSubCategBtn);
             this.groupBox2.Location = new System.Drawing.Point(537, 80);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(516, 372);
@@ -158,29 +158,31 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.AddSubCategory);
             // 
-            // button2
+            // editSubCategBtn
             // 
-            this.button2.Enabled = false;
-            this.button2.Image = global::HomeTaxer.Client.Properties.Resources.Edit_16x16;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(352, 87);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(115, 30);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Редагувати";
-            this.button2.UseVisualStyleBackColor = true;
+            this.editSubCategBtn.Enabled = false;
+            this.editSubCategBtn.Image = global::HomeTaxer.Client.Properties.Resources.Edit_16x16;
+            this.editSubCategBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.editSubCategBtn.Location = new System.Drawing.Point(352, 87);
+            this.editSubCategBtn.Name = "editSubCategBtn";
+            this.editSubCategBtn.Size = new System.Drawing.Size(115, 30);
+            this.editSubCategBtn.TabIndex = 7;
+            this.editSubCategBtn.Text = "Редагувати";
+            this.editSubCategBtn.UseVisualStyleBackColor = true;
+            this.editSubCategBtn.Click += new System.EventHandler(this.EditSubCategory);
             // 
-            // button3
+            // delSubCategBtn
             // 
-            this.button3.Enabled = false;
-            this.button3.Image = global::HomeTaxer.Client.Properties.Resources.Del_16x16;
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(352, 135);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(115, 30);
-            this.button3.TabIndex = 9;
-            this.button3.Text = " Видалити";
-            this.button3.UseVisualStyleBackColor = true;
+            this.delSubCategBtn.Enabled = false;
+            this.delSubCategBtn.Image = global::HomeTaxer.Client.Properties.Resources.Del_16x16;
+            this.delSubCategBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.delSubCategBtn.Location = new System.Drawing.Point(352, 135);
+            this.delSubCategBtn.Name = "delSubCategBtn";
+            this.delSubCategBtn.Size = new System.Drawing.Size(115, 30);
+            this.delSubCategBtn.TabIndex = 9;
+            this.delSubCategBtn.Text = " Видалити";
+            this.delSubCategBtn.UseVisualStyleBackColor = true;
+            this.delSubCategBtn.Click += new System.EventHandler(this.DelSubCategory);
             // 
             // saveBtn
             // 
@@ -234,8 +236,8 @@
         private System.Windows.Forms.ListBox subCategoriesLB;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button editSubCategBtn;
+        private System.Windows.Forms.Button delSubCategBtn;
         private System.Windows.Forms.ListBox categoriesLB;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button saveBtn;
